@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <!--    Custom   -->
+    <color name="accent">#5555FF</color>
+    <color name="background">#171722</color>
+    <color name="statusBar">@color/black</color>
+    <color name="whiteTransparent">#B4E7E7E8</color>
+    <color name="border">#4A4A52</color>
+    <color name="placeholder">#8B8B90</color>
+    <color name="error">#E3294A</color>
+    <color name="success">#1DC17C</color>
+    <color name="panel">#2C2A3C</color>
+    <!--    Data    -->
+    <color name="green">@color/success</color>
+    <color name="yellow">#F69A2D</color>
+    <color name="orange">@color/yellow</color>
+    <color name="purple">#448BCC</color>
+    <color name="blue">#2FBDDC</color>
+    <color name="red">@color/error</color>
+</resources>
