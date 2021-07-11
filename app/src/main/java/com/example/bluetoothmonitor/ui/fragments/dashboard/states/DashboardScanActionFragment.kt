@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import com.example.bluetoothmonitor.R
+import androidx.fragment.app.activityViewModels
 import com.example.bluetoothmonitor.databinding.FragmentScanActionBinding
+import com.example.bluetoothmonitor.ui.fragments.dashboard.DashboardViewModel
 
 class DashboardScanActionFragment : DashboardNestedFragment() {
     private val binding by lazy { FragmentScanActionBinding.inflate(layoutInflater) }
+    private val viewModel by activityViewModels<DashboardViewModel>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,6 +22,6 @@ class DashboardScanActionFragment : DashboardNestedFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.dashboardScanActionButton.setOnClickListener { findNavController().navigate(R.id.action_global_dashboardScanLoadingFragment) }
+        binding.dashboardScanActionButton.setOnClickListener { viewModel.startScan() }
     }
 }
