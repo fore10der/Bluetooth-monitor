@@ -28,8 +28,6 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        requireActivity().registerReceiver(viewModel.deviceReceiver, viewModel.filter)
         viewModel.state.onEach {
             mapViewModelState(it)
         }.launchWhenStarted(lifecycleScope)

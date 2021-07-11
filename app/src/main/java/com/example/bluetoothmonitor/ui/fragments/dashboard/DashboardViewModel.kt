@@ -7,18 +7,22 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.location.LocationManager
+import android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS
 import android.util.Log
 import android.widget.Toast
+import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
+
 class DashboardViewModel(application: Application) : AndroidViewModel(application) {
     private val _state = MutableStateFlow<DashboardState>(DashboardState.Initial)
     val state: StateFlow<DashboardState> = _state
-    val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
 
     val app = getApplication<Application>()
 
@@ -41,25 +45,16 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
             )
                 .show()
             _state.value = DashboardState.Initial
-        } else if (!adapter.startDiscovery()) {
-            Toast.makeText(
-                app.applicationContext,
-                "Can't discovery",
-                Toast.LENGTH_SHORT
-            )
-            _state.value = DashboardState.Initial
         } else {
-            Toast.makeText(
-                app.applicationContext,
-                "Discovery started",
-                Toast.LENGTH_SHORT
-            )
+            adapter.startDiscovery()
+
+            val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
+            app.applicationContext.registerReceiver(deviceReceiver, filter)
         }
     }
 
-    val deviceReceiver = object : BroadcastReceiver() {
+    private val deviceReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-            Log.d("device", "got")
             val action = intent.action
             if (BluetoothDevice.ACTION_FOUND == action) {
                 val device =
@@ -69,11 +64,15 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
                         is DashboardState.Loading -> {
                             _state.value =
                                 DashboardState.DevicesScanHasResults(mutableSetOf(device))
+                            Log.d("devices", (state.value as DashboardState.DevicesScanHasResults).devices.toString())
                         }
                         is DashboardState.DevicesScanHasResults -> {
+                            Log.d("device", device.toString())
+                            Log.d("devices", "loaded")
                             val copySet =
                                 (state.value as DashboardState.DevicesScanHasResults).devices.toMutableSet()
                             _state.value = DashboardState.DevicesScanHasResults(copySet)
+                            Log.d("devices", (state.value as DashboardState.DevicesScanHasResults).devices.toString())
                         }
                         else -> Unit
                     }
@@ -83,8 +82,8 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     override fun onCleared() {
-        app.unregisterReceiver(deviceReceiver)
         super.onCleared()
+        app.applicationContext.unregisterReceiver(deviceReceiver)
     }
 
     sealed class DashboardState {
