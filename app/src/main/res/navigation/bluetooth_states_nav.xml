@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bluetooth_states_nav"
+    app:startDestination="@id/dashboardScanActionFragment">
+    <fragment
+        android:id="@+id/dashboardScanActionFragment"
+        android:name="com.example.bluetoothmonitor.ui.fragments.dashboard.states.DashboardScanActionFragment"
+        android:label="DashboardScanActionFragment" />
+    <fragment
+        android:id="@+id/dashboardScanLoadingFragment"
+        android:name="com.example.bluetoothmonitor.ui.fragments.dashboard.states.DashboardScanLoadingFragment"
+        android:label="fragment_dashboard_scan_loading"
+        tools:layout="@layout/fragment_dashboard_scan_loading" />
+    <fragment
+        android:id="@+id/dashboardScanResultFragment"
+        android:name="com.example.bluetoothmonitor.ui.fragments.dashboard.states.DashboardScanResultFragment"
+        android:label="fragment_dashboard_scan_result"
+        tools:layout="@layout/fragment_dashboard_scan_result" /><action android:id="@+id/action_global_dashboardScanActionFragment" app:destination="@id/dashboardScanActionFragment"/><action android:id="@+id/action_global_dashboardScanLoadingFragment" app:destination="@id/dashboardScanLoadingFragment"/><action android:id="@+id/action_global_dashboardScanResultFragment" app:destination="@id/dashboardScanResultFragment"/>
+</navigation>

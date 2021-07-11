@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="app_layout_padding">16dp</dimen>
+    <dimen name="dashboard_device_size">200dp</dimen>
+    <dimen name="default_gap">32dp</dimen>
+    <dimen name="text_gap">8dp</dimen>
+    <dimen name="button_height">50dp</dimen>
 </resources>

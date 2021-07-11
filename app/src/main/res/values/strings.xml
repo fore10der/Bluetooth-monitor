@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">BluetoothMonitor</string>
     <!--    Dashboard-->
-    <string name="dashboard_title">Добавление устройства</string>
-    <string name="dashboard_description">Включите Bluetoth и удерживайте кнопкуна устройстве нажатой в течение 5 секунд</string>
+    <string name="dashboard_title_text">Добавление устройства</string>
+    <string name="dashboard_description_text">Включите Bluetoth и удерживайте кнопкуна устройстве нажатой в течение 5 секунд</string>
+    <string name="dashboard_devices_scan_button_text">Найти устройство</string>
+    <string name="dashboard_devices_loading_status_text">Поиск устройства...</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
