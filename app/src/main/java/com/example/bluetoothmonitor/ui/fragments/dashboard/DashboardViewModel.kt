@@ -69,9 +69,9 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
                         is DashboardState.DevicesScanHasResults -> {
                             Log.d("device", device.toString())
                             Log.d("devices", "loaded")
-                            val copySet =
-                                (state.value as DashboardState.DevicesScanHasResults).devices.toMutableSet()
-                            _state.value = DashboardState.DevicesScanHasResults(copySet)
+                            val copyState = (state.value as DashboardState.DevicesScanHasResults).copy()
+                            copyState.devices.add(device)
+                            _state.value = copyState
                             Log.d("devices", (state.value as DashboardState.DevicesScanHasResults).devices.toString())
                         }
                         else -> Unit
