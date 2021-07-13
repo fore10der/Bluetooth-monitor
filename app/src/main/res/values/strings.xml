@@ -2,9 +2,12 @@
     <string name="app_name">BluetoothMonitor</string>
     <!--    Dashboard-->
     <string name="dashboard_title_text">Добавление устройства</string>
-    <string name="dashboard_description_text">Включите Bluetoth и удерживайте кнопкуна устройстве нажатой в течение 5 секунд</string>
+    <string name="dashboard_start_scan_text">Включите Bluetoth и удерживайте кнопкуна устройстве нажатой в течение 5 секунд</string>
+    <string name="dashboard_await_scan_text">Подождите немного, ищем доступные устройства</string>
+    <string name="dashboard_results_scan_text">Выберите устройство для добавления в систему</string>
     <string name="dashboard_devices_scan_button_text">Найти устройство</string>
     <string name="dashboard_devices_loading_status_text">Поиск устройства...</string>
+    <string name="dashboard_devices_result_title_text">Найденные устройства</string>
     <string name="dashboard_dialog_location_required_title">Требуется доступ к геолокации</string>
     <string name="dashboard_dialog_location_required_description">Начиная с устройств на базе Android 10 для сканирования Bluetooth устройств требуется геолокация</string>
     <string name="dashboard_dialog_location_required_positive">Открыть настройки геолокации</string>

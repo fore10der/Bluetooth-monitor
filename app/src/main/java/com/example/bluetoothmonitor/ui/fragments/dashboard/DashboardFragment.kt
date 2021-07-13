@@ -1,11 +1,11 @@
 package com.example.bluetoothmonitor.ui.fragments.dashboard
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
@@ -37,14 +37,21 @@ class DashboardFragment : Fragment() {
     private fun mapViewModelState(state: DashboardViewModel.DashboardState) {
         when (state) {
             is DashboardViewModel.DashboardState.Initial -> {
+                binding.dashboardDescription.text = resources.getString(R.string.dashboard_start_scan_text)
                 scanNavController.navigate(R.id.action_global_dashboardScanActionFragment)
             }
             is DashboardViewModel.DashboardState.Loading -> {
+                binding.dashboardDescription.text = resources.getString(R.string.dashboard_await_scan_text)
                 scanNavController.navigate(R.id.action_global_dashboardScanLoadingFragment)
             }
             is DashboardViewModel.DashboardState.DevicesScanHasResults -> {
-                scanNavController.navigate(R.id.action_global_dashboardScanResultFragment)
+                if (!viewModel.hasResults) {
+                    binding.dashboardDescription.text = resources.getString(R.string.dashboard_results_scan_text)
+                    scanNavController.navigate(R.id.action_global_dashboardScanResultFragment)
+                    viewModel.hasResults = true
+                }
             }
+            else -> Unit
         }
     }
 }

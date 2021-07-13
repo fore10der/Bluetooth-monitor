@@ -6,56 +6,66 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.dashboard.DashboardFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/dashboardToolbar"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/deviceScanInfoLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            style="@style/Theme.BluetoothMonitor.TextView.Title"
-            android:id="@+id/dashboardToolbarTitle"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/dashboardToolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/dashboard_title_text" />
-    </androidx.appcompat.widget.Toolbar>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/dashboardDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:paddingLeft="32dp"
-        android:paddingRight="32dp"
-        android:text="@string/dashboard_description_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dashboardToolbar" />
+            <TextView
+                android:id="@+id/dashboardToolbarTitle"
+                style="@style/Theme.BluetoothMonitor.TextView.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/dashboard_title_text" />
+        </androidx.appcompat.widget.Toolbar>
 
-    <ImageView
-        android:id="@+id/dashboardDeviceImage"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/dashboard_device_size"
-        android:layout_marginTop="@dimen/default_gap"
-        android:src="@drawable/image_device"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dashboardDescription" />
+        <TextView
+            android:id="@+id/dashboardDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center_horizontal"
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
+            android:text="@string/dashboard_start_scan_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dashboardToolbar" />
+
+        <ImageView
+            android:id="@+id/dashboardDeviceImage"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dashboard_device_size"
+            android:layout_marginTop="@dimen/default_gap"
+            android:src="@drawable/image_device"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dashboardDescription" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/dashboardStatesContainerView"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/default_gap"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dashboardDeviceImage"
+        app:layout_constraintTop_toBottomOf="@+id/deviceScanInfoLayout"
         app:navGraph="@navigation/bluetooth_states_nav" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

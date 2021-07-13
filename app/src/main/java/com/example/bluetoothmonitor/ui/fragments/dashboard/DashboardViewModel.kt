@@ -23,6 +23,7 @@ import kotlinx.coroutines.launch
 class DashboardViewModel(application: Application) : AndroidViewModel(application) {
     private val _state = MutableStateFlow<DashboardState>(DashboardState.Initial)
     val state: StateFlow<DashboardState> = _state
+    var hasResults = false
 
     val app = getApplication<Application>()
 
@@ -69,9 +70,10 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
                         is DashboardState.DevicesScanHasResults -> {
                             Log.d("device", device.toString())
                             Log.d("devices", "loaded")
-                            val copyState = (state.value as DashboardState.DevicesScanHasResults).copy()
-                            copyState.devices.add(device)
-                            _state.value = copyState
+                            val devices = ((state.value as DashboardState.DevicesScanHasResults).devices)
+                            devices.add(device)
+                            _state.value = DashboardState.GotDevice
+                            _state.value = DashboardState.DevicesScanHasResults(devices)
                             Log.d("devices", (state.value as DashboardState.DevicesScanHasResults).devices.toString())
                         }
                         else -> Unit
@@ -89,7 +91,7 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
     sealed class DashboardState {
         data class DevicesScanHasResults(val devices: MutableSet<BluetoothDevice>) :
             DashboardState()
-
+        object GotDevice: DashboardState()
         object Initial : DashboardState()
         object Loading : DashboardState()
     }
