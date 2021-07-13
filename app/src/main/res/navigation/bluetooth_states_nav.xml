@@ -7,30 +7,16 @@
     <fragment
         android:id="@+id/dashboardScanActionFragment"
         android:name="com.example.bluetoothmonitor.ui.fragments.dashboard.states.DashboardScanActionFragment"
-        android:label="DashboardScanActionFragment" />
+        android:label="DashboardScanActionFragment" >
+        <action
+            android:id="@+id/action_dashboardScanActionFragment_to_dashboardScanStartedFragment2"
+            app:destination="@id/dashboardScanStartedFragment"
+            app:popUpTo="@id/dashboardScanActionFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
-        android:id="@+id/dashboardScanLoadingFragment"
-        android:name="com.example.bluetoothmonitor.ui.fragments.dashboard.states.DashboardScanLoadingFragment"
-        android:label="fragment_dashboard_scan_loading"
-        tools:layout="@layout/fragment_dashboard_scan_loading" />
-    <fragment
-        android:id="@+id/dashboardScanResultFragment"
-        android:name="com.example.bluetoothmonitor.ui.fragments.dashboard.states.DashboardScanResultFragment"
-        android:label="fragment_dashboard_scan_result"
-        tools:layout="@layout/fragment_dashboard_scan_result" />
-    <action
-        android:id="@+id/action_global_dashboardScanActionFragment"
-        app:destination="@id/dashboardScanActionFragment"
-        app:popUpTo="@id/bluetooth_states_nav"
-        app:popUpToInclusive="true" />
-    <action
-        android:id="@+id/action_global_dashboardScanLoadingFragment"
-        app:destination="@id/dashboardScanLoadingFragment"
-        app:popUpTo="@id/bluetooth_states_nav"
-        app:popUpToInclusive="true" />
-    <action
-        android:id="@+id/action_global_dashboardScanResultFragment"
-        app:destination="@id/dashboardScanResultFragment"
-        app:popUpTo="@id/bluetooth_states_nav"
-        app:popUpToInclusive="true" />
+        android:id="@+id/dashboardScanStartedFragment"
+        android:name="com.example.bluetoothmonitor.ui.fragments.dashboard.states.DashboardScanStartedFragment"
+        android:label="fragment_dashboard_scan_started"
+        tools:layout="@layout/fragment_dashboard_scan_started" />
 </navigation>
