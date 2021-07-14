@@ -2,12 +2,12 @@ package com.example.bluetoothmonitor.ui.fragments.dashboard.states
 
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothSocket
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,9 +17,10 @@ import com.example.bluetoothmonitor.databinding.FragmentDashboardScanStartedBind
 import com.example.bluetoothmonitor.ui.fragments.dashboard.adapters.BluetoothDeviceAdapter
 
 class DashboardScanStartedFragment : Fragment() {
-    val devices = mutableSetOf<BluetoothDevice>()
     private val binding by lazy { FragmentDashboardScanStartedBinding.inflate(layoutInflater) }
     private val btAdapter: BluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+    private val devices = btAdapter.bondedDevices.toMutableSet()
+    private val sockets = mutableSetOf<BluetoothSocket>()
 
     private val deviceReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
@@ -47,8 +48,11 @@ class DashboardScanStartedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (devices.size > 0) {
+            completeLoad()
+        }
 
-        val adapter = BluetoothDeviceAdapter(devices)
+        val adapter = BluetoothDeviceAdapter(devices, sockets, requireContext())
         val layoutManager = LinearLayoutManager(context)
         binding.devicesRecycler.layoutManager = layoutManager
         binding.devicesRecycler.adapter = adapter
@@ -59,8 +63,8 @@ class DashboardScanStartedFragment : Fragment() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         requireActivity().unregisterReceiver(deviceReceiver)
+        super.onDestroy()
     }
 
     private fun completeLoad() {
